@@ -21,7 +21,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "bucket1" {
-  bucket = "itachiuchihaaa"
+  bucket = "data-lake-h-m-pk"
   tags = {
     Name = "My bucket"
   }
@@ -71,7 +71,7 @@ resource "aws_s3_object" "object3_articles" {
 #---------------------Redshift-Log-Bucket--------------------
 
 resource "aws_s3_bucket" "bucket2" {
-  bucket = "redshift-group1hm"
+  bucket = "redshift-logs-pk"
   tags = {
     Name = "My bucket RS Logs"
   }
@@ -111,7 +111,7 @@ resource "aws_redshift_cluster" "redshiftCluster1" {
   cluster_identifier = "tf-redshift-cluster"
   database_name      = "dev"
   master_username    = "awsuser"
-  master_password    = "HM27march99"
+  master_password    = "HM27march99" 
   node_type          = "dc2.large"
   cluster_type       = "single-node"
 }
@@ -132,7 +132,7 @@ resource "aws_glue_job" "glue_job1" {
   number_of_workers = 2
   worker_type = "Standard"
   command {
-    script_location = "s3://terraform-rasengan/Historic-Customer-Article-Source-to-Lake.py"
+    script_location = "s3://input-bucket-h-m/GlueScripts/Historic-Customer-Article-Source-to-Lake.py"
     python_version = "3"
   }
   glue_version = "4.0"
@@ -149,7 +149,7 @@ resource "aws_glue_job" "glue_job2" {
   number_of_workers = 2
   worker_type = "Standard"
   command {
-    script_location = "s3://terraform-rasengan/Historic-Transaction-Source-to-Lake.py"
+    script_location = "s3://input-bucket-h-m/GlueScripts/Historic-Transaction-Source-to-Lake.py"
     python_version = "3"
   }
   glue_version = "4.0"
@@ -166,7 +166,7 @@ resource "aws_glue_job" "glue_job3" {
   number_of_workers = 2
   worker_type = "Standard"
   command {
-    script_location = "s3://terraform-rasengan/Historic-data-from-lake-to-redshift.py"
+    script_location = "s3://input-bucket-h-m/GlueScripts/Historic-data-from-lake-to-redshift.py"
     python_version = "3"
   }
   glue_version = "4.0"
@@ -183,7 +183,7 @@ resource "aws_glue_job" "glue_job4" {
   number_of_workers = 2
   worker_type = "Standard"
   command {
-    script_location = "s3://terraform-rasengan/Transac-Cust-Article-Live-Source-to-Lake.py"
+    script_location = "s3://input-bucket-h-m/GlueScripts/Transac-Cust-Article-Live-Source-to-Lake.py"
     python_version = "3"
   }
   glue_version = "4.0"
@@ -200,7 +200,7 @@ resource "aws_glue_job" "glue_job5" {
   number_of_workers = 2
   worker_type = "Standard"
   command {
-    script_location = "s3://terraform-rasengan/Live-data-from-lake-to-redshift.py"
+    script_location = "s3://input-bucket-h-m/GlueScripts/Live-data-from-lake-to-redshift.py"
     python_version = "3"
   }
   glue_version = "4.0"
@@ -236,7 +236,7 @@ resource "aws_sfn_state_machine" "sfn_state_machine" {
     },
     "Lake-Redshift-hist-upd": {
       "Type": "Task",
-      "Resource": "arn:aws:states:::glue:startJobRun",
+      "Resource": "arn:aws:states:::glue:startJobRun.sync",
       "Parameters": {
         "JobName": "Lake-Redshift-hist-upd"
       },
@@ -270,7 +270,7 @@ resource "aws_sfn_state_machine" "sfn_state_machine1" {
     },
     "Live-Source-Redshift": {
       "Type": "Task",
-      "Resource": "arn:aws:states:::glue:startJobRun",
+      "Resource": "arn:aws:states:::glue:startJobRun.sync",
       "Parameters": {
         "JobName": "Live_data_lake_redshift"
       },
@@ -280,4 +280,3 @@ resource "aws_sfn_state_machine" "sfn_state_machine1" {
 }
 EOF
 }
-
