@@ -71,7 +71,7 @@ resource "aws_s3_object" "object3_articles" {
 #---------------------Redshift-Log-Bucket--------------------
 
 resource "aws_s3_bucket" "bucket2" {
-  bucket = "redshift-logs-sg"
+  bucket = "redshift-group1hm"
   tags = {
     Name = "My bucket RS Logs"
   }
