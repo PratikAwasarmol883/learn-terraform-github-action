@@ -42,6 +42,7 @@ resource "aws_s3_bucket_public_access_block" "bucket1" {
   ignore_public_acls      = false
   restrict_public_buckets = false
 }
+#this is aws bucket resource syntax
 
 resource "aws_s3_bucket_acl" "bucket1" {
   depends_on = [
