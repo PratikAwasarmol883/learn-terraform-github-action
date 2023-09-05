@@ -21,7 +21,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "bucket1" {
-  bucket = "data-lake-h-m-prk"
+  bucket = "data-lake-h-m-pratik"
   tags = {
     Name = "My bucket"
   }
@@ -72,7 +72,7 @@ resource "aws_s3_object" "object3_articles" {
 #---------------------Redshift-Log-Bucket--------------------
 
 resource "aws_s3_bucket" "bucket2" {
-  bucket = "redshift-logs-pk"
+  bucket = "redshift-logs-pratik"
   tags = {
     Name = "My bucket RS Logs"
   }
