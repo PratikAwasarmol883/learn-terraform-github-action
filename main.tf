@@ -72,7 +72,7 @@ resource "aws_s3_object" "object3_articles" {
 #---------------------Redshift-Log-Bucket--------------------
 
 resource "aws_s3_bucket" "bucket2" {
-  bucket = "redshift-logs-prk"
+  bucket = "redshift-logs-pk"
   tags = {
     Name = "My bucket RS Logs"
   }
@@ -189,7 +189,6 @@ resource "aws_glue_job" "glue_job4" {
   }
   glue_version = "4.0"
 }
-#below tera code is for live data-lake-redshift
 #------------------LIVE-DATA-LAKE-REDSHIFT-----------------------------
 
 resource "aws_glue_job" "glue_job5" {
