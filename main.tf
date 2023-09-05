@@ -21,7 +21,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "bucket1" {
-  bucket = "data-lake-h-m-pk"
+  bucket = "data-lake-h-m-prk"
   tags = {
     Name = "My bucket"
   }
@@ -189,7 +189,6 @@ resource "aws_glue_job" "glue_job4" {
   }
   glue_version = "4.0"
 }
-
 #------------------LIVE-DATA-LAKE-REDSHIFT-----------------------------
 
 resource "aws_glue_job" "glue_job5" {
