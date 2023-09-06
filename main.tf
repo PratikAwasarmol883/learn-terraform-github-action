@@ -122,7 +122,7 @@ resource "aws_redshift_cluster_iam_roles" "redshiftCluster1" {
   cluster_identifier = aws_redshift_cluster.redshiftCluster1.cluster_identifier
   iam_role_arns      = ["arn:aws:iam::465985972779:role/LabRole"]
 } 
-
+#HIST-CUST-ART-SOURCE-LAKE
 #----------------HIST-CUST-ART-SOURCE-LAKE-------------------------
 
 resource "aws_glue_job" "glue_job1" {
