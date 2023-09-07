@@ -22,7 +22,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "bucket1" {
-  bucket = "data-lake-h-m-pratik"
+  bucket = "datalake-rawzone-group1dbda"
   tags = {
     Name = "My bucket"
   }
@@ -73,7 +73,7 @@ resource "aws_s3_object" "object3_articles" {
 #---------------------Redshift-Log-Bucket--------------------
 
 resource "aws_s3_bucket" "bucket2" {
-  bucket = "redshift-logs-pratik"
+  bucket = "redshift-logs-group1dbda"
   tags = {
     Name = "My bucket RS Logs"
   }
@@ -211,7 +211,7 @@ resource "aws_glue_job" "glue_job5" {
 
 
 resource "aws_sfn_state_machine" "sfn_state_machine" {
-  name     = "hist-data-lake-redshift"
+  name     = "historic-data-source-to-redshift"
   role_arn = "arn:aws:iam::465985972779:role/LabRole"
 
   definition = <<EOF
@@ -253,7 +253,7 @@ EOF
 
 
 resource "aws_sfn_state_machine" "sfn_state_machine1" {
-  name     = "Live-data-lake-redshift"
+  name     = "live-data-source-to-redshift"
   role_arn = "arn:aws:iam::465985972779:role/LabRole"
 
   definition = <<EOF
