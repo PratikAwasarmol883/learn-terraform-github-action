@@ -248,7 +248,7 @@ resource "aws_sfn_state_machine" "sfn_state_machine" {
 EOF
 }
 
-
+#aws_sfn_state_machine1 we willusethisname
 #--------------------LIVE-DATA-PIPELINE-SFN---------------------------
 
 
